@@ -49,34 +49,33 @@ function timeFormat(time,format) {
     let timeArray = timePattern.exec(time.toTimeString());
     let dateArray = datePattern.exec(time.toDateString());
     let weekDay = dateArray[1],
-        momth = dateArray[2],
+        month = dateArray[2],
         day = dateArray[3],
         year = dateArray[4],
         hour = timeArray[1],
         minute = timeArray[2],
         second = timeArray[3];
     let resultTime;
-    switch (momth){
-        case "Jan" : momth =  "01";break;
-        case "Feb" : momth =  "02";break;
-        case "Mar" : momth =  "03";break;
-        case "Apr" : momth =  "04";break;
-        case "May" : momth =  "05";break;
-        case "June" : momth =  "06";break;
-        case "July" : momth =  "07";break;
-        case "Aug" : momth =  "08";break;
-        case "Sept" : momth =  "09";break;
-        case "Oct" : momth =  "10";break;
-        case "Nov" : momth =  "11";break;
-        case "Dec" : momth =  "12";break;
+    switch (month){
+        case "Jan" : month =  "01";break;
+        case "Feb" : month =  "02";break;
+        case "Mar" : month =  "03";break;
+        case "Apr" : month =  "04";break;
+        case "May" : month =  "05";break;
+        case "June" : month =  "06";break;
+        case "July" : month =  "07";break;
+        case "Aug" : month =  "08";break;
+        case "Sept" : month =  "09";break;
+        case "Oct" : month =  "10";break;
+        case "Nov" : month =  "11";break;
+        case "Dec" : month =  "12";break;
     }
-    console.log(format);
-    switch (format){
-        case "toSecond" :   resultTime = year + "-" + momth + "-" + day + " " + hour + ":" + minute + ":" + second; break;
-        case "toMinute" :   resultTime = year + "-" + momth + "-" + day + " " + hour + ":" + minute; break
-        case "toDay":  resultTime = year + "-" + momth + "-" + day; break;
-        case "toMonth": resultTime = year + "-" + momth; break;
-        case "toYear": resultTime = year;break;
-    }
-    return resultTime;
+    return {
+        year:year,
+        month:month,
+        day:day,
+        hour:hour,
+        minute:minute,
+        second:second
+    };
 }
