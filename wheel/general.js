@@ -40,8 +40,9 @@ function SaferHTML(templateData) {
 
 /**
  * 时间格式化,
+ * toSecond,toMinute,toDay//详尽至秒，详尽至分，详尽至天，字符串
  */
-function timeFormat(time) {
+function timeFormat(time,objBoolean ,format) {
     let timePattern = /(\S*):(\S*):(\S*) (\S*)/i;
     let datePattern = /(\S*) (\S*) (\S*) (\S*)/i;
     let timeArray = timePattern.exec(time.toTimeString());
@@ -53,6 +54,7 @@ function timeFormat(time) {
         hour = timeArray[1],
         minute = timeArray[2],
         second = timeArray[3];
+    let resultTime;
     switch (month){
         case "Jan" : month =  "01";break;
         case "Feb" : month =  "02";break;
@@ -67,13 +69,24 @@ function timeFormat(time) {
         case "Nov" : month =  "11";break;
         case "Dec" : month =  "12";break;
     }
-    return {
-        year:year,
-        month:month,
-        day:day,
-        hour:hour,
-        minute:minute,
-        second:second,
-        weekDay:weekDay
-    };
+    if(objBoolean === false){
+        switch (format){
+            case "toSecond" :   resultTime = year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second; break;
+            case "toMinute" :   resultTime = year + "-" + month + "-" + day + " " + hour + ":" + minute; break
+            case "toDay":  resultTime = year + "-" + month + "-" + day; break;
+            case "toMonth": resultTime = year + "-" + month; break;
+            case "toYear": resultTime = year;break;
+        }
+        return resultTime;
+    }else{
+        return {
+            year:year,
+            month:month,
+            day:day,
+            hour:hour,
+            minute:minute,
+            second:second,
+            weekDay:weekDay
+        };
+    }
 }
