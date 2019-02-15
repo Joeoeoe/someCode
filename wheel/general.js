@@ -38,4 +38,45 @@ function SaferHTML(templateData) {
 // let sender = '<script>alert(111)</script>';
 // let message = SaferHTML`<p>这里面可能有恶意代码，比如${sender}</p>`;
 
-
+/**
+ * 时间格式化,
+ * toSecond,toMinute,toDay//详尽至秒，详尽至分，详尽至天，字符串
+ */
+function timeFormat(time,format) {
+    let detail;
+    let timePattern = /(\S*):(\S*):(\S*) (\S*)/i;
+    let datePattern = /(\S*) (\S*) (\S*) (\S*)/i;
+    let timeArray = timePattern.exec(time.toTimeString());
+    let dateArray = datePattern.exec(time.toDateString());
+    let weekDay = dateArray[1],
+        momth = dateArray[2],
+        day = dateArray[3],
+        year = dateArray[4],
+        hour = timeArray[1],
+        minute = timeArray[2],
+        second = timeArray[3];
+    let resultTime;
+    switch (momth){
+        case "Jan" : momth =  "01";break;
+        case "Feb" : momth =  "02";break;
+        case "Mar" : momth =  "03";break;
+        case "Apr" : momth =  "04";break;
+        case "May" : momth =  "05";break;
+        case "June" : momth =  "06";break;
+        case "July" : momth =  "07";break;
+        case "Aug" : momth =  "08";break;
+        case "Sept" : momth =  "09";break;
+        case "Oct" : momth =  "10";break;
+        case "Nov" : momth =  "11";break;
+        case "Dec" : momth =  "12";break;
+    }
+    console.log(format);
+    switch (format){
+        case "toSecond" :   resultTime = year + "-" + momth + "-" + day + " " + hour + ":" + minute + ":" + second; break;
+        case "toMinute" :   resultTime = year + "-" + momth + "-" + day + " " + hour + ":" + minute; break
+        case "toDay":  resultTime = year + "-" + momth + "-" + day; break;
+        case "toMonth": resultTime = year + "-" + momth; break;
+        case "toYear": resultTime = year;break;
+    }
+    return resultTime;
+}
