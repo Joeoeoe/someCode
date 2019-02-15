@@ -40,10 +40,8 @@ function SaferHTML(templateData) {
 
 /**
  * 时间格式化,
- * toSecond,toMinute,toDay//详尽至秒，详尽至分，详尽至天，字符串
  */
-function timeFormat(time,format) {
-    let detail;
+function timeFormat(time) {
     let timePattern = /(\S*):(\S*):(\S*) (\S*)/i;
     let datePattern = /(\S*) (\S*) (\S*) (\S*)/i;
     let timeArray = timePattern.exec(time.toTimeString());
@@ -55,7 +53,6 @@ function timeFormat(time,format) {
         hour = timeArray[1],
         minute = timeArray[2],
         second = timeArray[3];
-    let resultTime;
     switch (month){
         case "Jan" : month =  "01";break;
         case "Feb" : month =  "02";break;
@@ -76,6 +73,7 @@ function timeFormat(time,format) {
         day:day,
         hour:hour,
         minute:minute,
-        second:second
+        second:second,
+        weekDay:weekDay
     };
 }
