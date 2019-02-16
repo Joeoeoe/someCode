@@ -46,7 +46,6 @@ function SaferHTML(templateData) {
 function dateStringFormat({dateString = new Date().toString(), objBoolean = false, format = 'toDay'} = {}) {
     let datePattern = /(\S*) (\S*) (\S*) (\S*) (\S*):(\S*):(\S*) (\S*)/i;
     let patternArray = datePattern.exec(dateString);
-    console.log(patternArray);
     let weekDay = patternArray[1],
         month = patternArray[2],
         day = patternArray[3],
@@ -198,3 +197,40 @@ function dateOffset({dateObj = new Date(), offsetObj = {year: 0, month: 0, day: 
         date = dateObj.getDate();
     return new Date(year + offsetObj.year, month + offsetObj.month, date + offsetObj.day);
 }
+
+/**
+ *
+ * @param dateObj1
+ * @param dateObj2
+ * @param precision 对比精度
+ * 时间轴上，dateObj1快于dateObj2返回1，慢于返回-1，等于返回0
+ */
+function timeCompare({dateObj1, dateObj2, precision = 'day'} = {}) {
+    let date1Array = [dateObj1.getFullYear(), dateObj1.getMonth(), dateObj1.getDate(), dateObj1.getHours(), dateObj1.getMinutes(), dateObj1.getSeconds()];
+    let date2Array = [dateObj2.getFullYear(), dateObj2.getMonth(), dateObj2.getDate(), dateObj2.getHours(), dateObj2.getMinutes(), dateObj2.getSeconds()];
+    let compareIndex, result = 0;
+    switch (precision){
+        case 'year': compareIndex = 1; break;
+        case 'month': compareIndex = 2; break;
+        case 'day': compareIndex = 3; break;
+        case 'hour': compareIndex = 4; break;
+        case 'minute': compareIndex = 5; break;
+        case 'second': compareIndex = 6; break;
+    }
+    for(let i = 0; i < compareIndex; i++){
+        let num1 = ~~date1Array[i], num2 = ~~date2Array[i];
+        console.log(num1);
+        console.log(num2);
+        if(num1 === num2){
+            continue;
+        }else if (num1 > num2){
+            result = 1;
+            break;
+        }else if(num1 < num2){
+            result = -1;
+            break;
+        }
+    }
+    return result;
+}
+
