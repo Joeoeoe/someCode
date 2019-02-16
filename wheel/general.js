@@ -40,21 +40,20 @@ function SaferHTML(templateData) {
 // let message = SaferHTML`<p>这里面可能有恶意代码，比如${sender}</p>`;
 
 /**
- * 时间格式化,
+ * Date对象字符串格式化,
  * toSecond,toMinute,toDay//详尽至秒，详尽至分，详尽至天，字符串
  */
-function timeFormat(time, objBoolean, format) {
-    let timePattern = /(\S*):(\S*):(\S*) (\S*)/i;
-    let datePattern = /(\S*) (\S*) (\S*) (\S*)/i;
-    let timeArray = timePattern.exec(time.toTimeString());
-    let dateArray = datePattern.exec(time.toDateString());
-    let weekDay = dateArray[1],
-        month = dateArray[2],
-        day = dateArray[3],
-        year = dateArray[4],
-        hour = timeArray[1],
-        minute = timeArray[2],
-        second = timeArray[3];
+function dateStringFormat({dateString = new Date().toString(), objBoolean = false, format = 'toDay'} = {}) {
+    let datePattern = /(\S*) (\S*) (\S*) (\S*) (\S*):(\S*):(\S*) (\S*)/i;
+    let patternArray = datePattern.exec(dateString);
+    console.log(patternArray);
+    let weekDay = patternArray[1],
+        month = patternArray[2],
+        day = patternArray[3],
+        year = patternArray[4],
+        hour = patternArray[5],
+        minute = patternArray[6],
+        second = patternArray[7];
     let resultTime;
     switch (month) {
         case "Jan" :
@@ -127,14 +126,14 @@ function timeFormat(time, objBoolean, format) {
 }
 
 /**
- * 时间格式化函数
+ * Date对象格式化函数
  * @param dateObj  date对象
  * @param objBoolean 返回对象内容还是拼接字符串
  * @param format  toSecond,toMinute,toDay,toMonth,toYear
  * @param zeroStart 月，星期几是否下标0开始
  * @returns {*}
  */
-function timeFormat({dateObj = new Date(), objBoolean = true, format = 'toDay', zeroStart = false} = {}) {
+function dateFormat({dateObj = new Date(), objBoolean = false, format = 'toDay', zeroStart = false} = {}) {
     let year = dateObj.getFullYear(),
         month = dateObj.getMonth(), //0下标开始
         day = dateObj.getDate(),
