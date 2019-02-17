@@ -186,7 +186,7 @@ function dateFormat({dateObj = new Date(), objBoolean = false, format = 'toDay',
 }
 
 /**
- * 时间偏移设置
+ * 时间偏移
  * @param dateObj Date对象
  * @param offsetObj date偏移量设置
  * @returns {Date}
@@ -195,7 +195,7 @@ function dateOffset({dateObj = new Date(), offsetObj = {year: 0, month: 0, day: 
     let year = dateObj.getFullYear(),
         month = dateObj.getMonth(),
         date = dateObj.getDate();
-    return new Date(year + offsetObj.year, month + offsetObj.month, date + offsetObj.day);
+    return new Date(year + offsetObj.year, month + offsetObj.month, date + offsetObj.day, date.getHours(), date.getMinutes(),date.getSeconds(),date.getMilliseconds());
 }
 
 /**
