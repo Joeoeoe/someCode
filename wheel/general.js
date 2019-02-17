@@ -34,14 +34,16 @@ function SaferHTML(templateData) {
     }
     return s;
 }
-
 //举例
 // let sender = '<script>alert(111)</script>';
 // let message = SaferHTML`<p>这里面可能有恶意代码，比如${sender}</p>`;
 
 /**
  * Date对象字符串格式化,
- * toSecond,toMinute,toDay//详尽至秒，详尽至分，详尽至天，字符串
+ * @param dateObj  date对象
+ * @param objBoolean 返回对象内容还是拼接字符串
+ * @param format  toSecond,toMinute,toDay,toMonth,toYear字符串
+ * @returns {*}
  */
 function dateStringFormat({dateString = new Date().toString(), objBoolean = false, format = 'toDay'} = {}) {
     let datePattern = /(\S*) (\S*) (\S*) (\S*) (\S*):(\S*):(\S*) (\S*)/i;
@@ -128,7 +130,7 @@ function dateStringFormat({dateString = new Date().toString(), objBoolean = fals
  * Date对象格式化函数
  * @param dateObj  date对象
  * @param objBoolean 返回对象内容还是拼接字符串
- * @param format  toSecond,toMinute,toDay,toMonth,toYear
+ * @param format  toSecond,toMinute,toDay,toMonth,toYear字符串
  * @param zeroStart 月，星期几是否下标0开始
  * @returns {*}
  */
@@ -195,7 +197,7 @@ function dateOffset({dateObj = new Date(), offsetObj = {year: 0, month: 0, day: 
     let year = dateObj.getFullYear(),
         month = dateObj.getMonth(),
         date = dateObj.getDate();
-    return new Date(year + offsetObj.year, month + offsetObj.month, date + offsetObj.day, date.getHours(), date.getMinutes(),date.getSeconds(),date.getMilliseconds());
+    return new Date(year + offsetObj.year, month + offsetObj.month, date + offsetObj.day, dateObj.getHours(), dateObj.getMinutes(),dateObj.getSeconds(),dateObj.getMilliseconds());
 }
 
 /**
