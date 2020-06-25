@@ -18,6 +18,7 @@ let $three = {
             control: null, //常用OrbitControls
             stats: null
         };
+
         //渲染器
         threeConf.renderer = new THREE.WebGLRenderer({
             antialias: true, //是否开启抗锯齿
@@ -56,8 +57,6 @@ let $three = {
             threeConf.scene.add(axes);
         }
 
-
-
         return threeConf;
 
     },
@@ -79,6 +78,7 @@ let $three = {
         );
         // cubeMesh.rotation.x += 0.1;
         cubeMesh.rotation.y += 0.1;
+        console.log(123);
         threeConf.renderer.render(threeConf.scene, threeConf.camera)
     },
 };
